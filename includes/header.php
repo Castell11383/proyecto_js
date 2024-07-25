@@ -8,4 +8,5 @@
     <title>Proyecto_JS</title>
 </head>
 <body>
-    
+
+<?php include_once 'navbar.php' ?>
