@@ -42,39 +42,32 @@ class Programador extends Conexion
     $sql = "SELECT * FROM programadores WHERE progra_situacion = 1";
 
     if ($this->progra_nombre != '') {
-        $sql .= " AND progra_nombre LIKE '%" . $this->escape($this->progra_nombre) . "%'";
+        $sql .= " AND progra_nombre LIKE '%$this->progra_nombre%'";
     }
 
     if ($this->progra_apellido != '') {
-        $sql .= " AND progra_apellido LIKE '%" . $this->escape($this->progra_apellido) . "%'";
+        $sql .= " AND progra_apellido LIKE '%$this->progra_apellido%'";
     }
 
     if ($this->progra_edad != '') {
-        $sql .= " AND progra_edad = " . (int)$this->progra_edad;
+        $sql .= " AND progra_edad = $this->progra_edad";
     }
 
     if ($this->progra_genero != '') {
-        $sql .= " AND progra_genero = '" . $this->escape($this->progra_genero) . "'";
+        $sql .= " AND progra_genero = '$this->progra_genero'";
     }
 
     if ($this->progra_dependencia != '') {
-        $sql .= " AND progra_dependencia LIKE '%" . $this->escape($this->progra_dependencia) . "%'";
+        $sql .= " AND progra_dependencia LIKE '%$this->progra_dependencia%'";
     }
 
     if ($this->progra_id != null) {
-        $sql .= " AND progra_id = " . (int)$this->progra_id;
+        $sql .= " AND progra_id = $this->progra_id";
     }
 
     $resultado = self::servir($sql);
     return $resultado;
 }
-
-private function escape($value) {
-    // Aquí puedes usar la función de escape de tu framework o biblioteca de base de datos
-    // Por ejemplo, para PDO:
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-}
-
 
     public function modificar()
     {

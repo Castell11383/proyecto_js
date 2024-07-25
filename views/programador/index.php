@@ -65,8 +65,30 @@
             </div>
         </form>
     </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 table-responsive">
+            <h2 class="text-center">Listado de clientes</h2>
+            <table class="table table-bordered table-hover border-dark rounded" id="tablaProgramadores">
+                <thead class="bg-secondary bg-gradient">
+                    <tr>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Dependencia</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white bg-gradient">
+                    <tr>
+                        <td colspan="5">No hay clientes disponibles</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script defer src="../../src/js/funciones.js"></script>
+<script defer src="../../src/js/programador/index.js"></script>
 
-    <script defer src="../../src/js/funciones.js"></script>
-    <script defer src="../../src/js/programador/index.js"></script>
-
-    <?php include_once '../../includes/footer.php' ?>
+<?php include_once '../../includes/footer.php' ?>

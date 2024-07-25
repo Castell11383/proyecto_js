@@ -26,8 +26,11 @@ const getProgramador = async (alerta='si') => {
 
     try {
         const respuesta = await fetch(url, config);
-        // console.log(respuesta)
+        console.log(respuesta)
         const data = await respuesta.json();
+
+        // console.log(data)
+
         tablaProgramador.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment()
         let contador = 1;
@@ -38,7 +41,7 @@ const getProgramador = async (alerta='si') => {
                     toast: true,
                     position: "top-end",
                     showConfirmButton: false,
-                    timer: 2000,
+                    timer: 3000,
                     timerProgressBar: true,
                     icon: "success",
                     title: 'Programadores encontrados',
@@ -58,7 +61,6 @@ const getProgramador = async (alerta='si') => {
                     const celda4 = document.createElement('td')
                     const celda5 = document.createElement('td')
                     const celda6 = document.createElement('td')
-                    const celda7 = document.createElement('td')
                     const buttonModificar = document.createElement('button')
                     const buttonEliminar = document.createElement('button')
 
@@ -66,7 +68,6 @@ const getProgramador = async (alerta='si') => {
                     celda2.innerText = programador.progra_nombre;
                     celda3.innerText = programador.progra_apellido;
                     celda4.innerText = programador.progra_Dependencia;
-                    celda5.innerText = programador.progra_genero;
 
 
                     buttonModificar.textContent = 'Modificar'
@@ -79,8 +80,8 @@ const getProgramador = async (alerta='si') => {
                     buttonEliminar.innerHTML = '<i class="bi bi-person-x-fill"></i> Eliminar'
                     buttonEliminar.addEventListener('click', () => EliminarProgramadores(programador.progra_id))
 
-                    celda6.appendChild(buttonModificar)
-                    celda7.appendChild(buttonEliminar)
+                    celda5.appendChild(buttonModificar)
+                    celda6.appendChild(buttonEliminar)
 
                     tr.appendChild(celda1)
                     tr.appendChild(celda2)
@@ -88,7 +89,6 @@ const getProgramador = async (alerta='si') => {
                     tr.appendChild(celda4)
                     tr.appendChild(celda5)
                     tr.appendChild(celda6)
-                    tr.appendChild(celda7)
                     fragment.appendChild(tr);
 
                     contador++
