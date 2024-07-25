@@ -3,7 +3,7 @@ const btnModificar = document.getElementById('btnModificar')
 const btnBuscar = document.getElementById('btnBuscar')
 const btnCancelar = document.getElementById('btnCancelar')
 const btnLimpiar = document.getElementById('btnLimpiar')
-const tablaProgramador = document.getElementById('tablaProgramadores')
+const tablaProgramador = document.getElementById('tablaProgramador')
 const formulario = document.querySelector('form')
 
 btnModificar.parentElement.style.display = 'none'
@@ -26,7 +26,7 @@ const getProgramador = async (alerta='si') => {
 
     try {
         const respuesta = await fetch(url, config);
-        console.log(respuesta)
+        // console.log(respuesta)
         const data = await respuesta.json();
 
         // console.log(data)
@@ -34,7 +34,7 @@ const getProgramador = async (alerta='si') => {
         tablaProgramador.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment()
         let contador = 1;
-        console.log(data);
+        // console.log(data);
         if (respuesta.status == 200) {
             if(alerta == 'si'){
                 Swal.mixin({
@@ -67,18 +67,18 @@ const getProgramador = async (alerta='si') => {
                     celda1.innerText = contador;
                     celda2.innerText = programador.progra_nombre;
                     celda3.innerText = programador.progra_apellido;
-                    celda4.innerText = programador.progra_Dependencia;
+                    celda4.innerText = programador.progra_dependencia;
 
 
                     buttonModificar.textContent = 'Modificar'
-                    buttonModificar.classList.add('btn', 'btn-success', 'w-100')
+                    buttonModificar.classList.add('btn', 'btn-secondary', 'w-100')
                     buttonModificar.innerHTML = '<i class="bi bi-back"></i> Modificar'
                     buttonModificar.addEventListener('click', () => llenarDatos(programador))
 
                     buttonEliminar.textContent = 'Eliminar'
                     buttonEliminar.classList.add('btn', 'btn-danger', 'w-100')
                     buttonEliminar.innerHTML = '<i class="bi bi-person-x-fill"></i> Eliminar'
-                    buttonEliminar.addEventListener('click', () => EliminarProgramadores(programador.progra_id))
+                    buttonEliminar.addEventListener('click', () => EliminarProgramador(programador.progra_id))
 
                     celda5.appendChild(buttonModificar)
                     celda6.appendChild(buttonEliminar)
@@ -114,28 +114,6 @@ const getProgramador = async (alerta='si') => {
     }
 }
 
-const llenarDatos = (programador) => {
-
-    // console.log(programador)
-
-    formulario.progra_id.value = programador.progra_id
-    formulario.progra_nombre.value = programador.progra_nombre
-    formulario.progra_apellido.value = programador.progra_apellido
-    formulario.progra_edad.value = programador.progra_edad
-    formulario.progra_correo.value = programador.progra_correo
-    formulario.progra_direccion.value = programador.progra_direccion
-    formulario.progra_telefono.value = programador.progra_telefono
-    formulario.progra_dependencia.value = programador.progra_dependencia
-    formulario.progra_genero.value = programador.progra_genero
-
-    btnModificar.parentElement.style.display = ''
-    btnCancelar.parentElement.style.display = ''
-    btnGuardar.parentElement.style.display = 'none'
-    btnBuscar.parentElement.style.display = 'none'
-    btnLimpiar.parentElement.style.display = 'none'
-
-}
-
 //GUARDAR
 
 const guardarProgramadores = async (e) => {
@@ -156,13 +134,14 @@ const guardarProgramadores = async (e) => {
     try {
         const respuesta = await fetch(url, config)
         const data = await respuesta.json()
-        const { mensaje, codigo, detalle } = data
+        const {mensaje, codigo, detalle } = data
         console.log(data)
+
         Swal.mixin({
             toast: true,
             position: "top-end",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 3000,
             timerProgressBar: true,
             icon: "success",
             title: mensaje,
@@ -171,7 +150,6 @@ const guardarProgramadores = async (e) => {
                 toast.onmouseleave = Swal.resumeTimer
             }
         }).fire()
-        alert(mensaje)
         if (codigo == 1 && respuesta.status == 200) {
             formulario.reset()
             getProgramador(alerta='no');
@@ -184,6 +162,31 @@ const guardarProgramadores = async (e) => {
     }
     btnGuardar.disabled = false
 }
+
+
+const llenarDatos = (programador) => {
+
+    console.log(programador)
+
+    formulario.progra_id.value = programador.progra_id
+    formulario.progra_nombre.value = programador.progra_nombre
+    formulario.progra_apellido.value = programador.progra_apellido
+    formulario.progra_edad.value = programador.progra_edad
+    formulario.progra_correo.value = programador.progra_correo
+    formulario.progra_direccion.value = programador.progra_direccion
+    formulario.progra_telefono.value = programador.progra_telefono
+    formulario.progra_dependencia.value = programador.progra_dependencia
+    formulario.progra_genero.value = programador.progra_genero
+
+    btnModificar.parentElement.style.display = ''
+    btnCancelar.parentElement.style.display = ''
+    btnGuardar.parentElement.style.display = 'none'
+    btnBuscar.parentElement.style.display = 'none'
+    btnLimpiar.parentElement.style.display = 'none'
+
+}
+
+//MODIFICAR
 
 const ModificarProgramadores = async (e) => {
     e.preventDefault()
@@ -207,7 +210,7 @@ const ModificarProgramadores = async (e) => {
             toast: true,
             position: "top-end",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 3000,
             timerProgressBar: true,
             icon: "success",
             title: mensaje,
@@ -216,7 +219,7 @@ const ModificarProgramadores = async (e) => {
                 toast.onmouseleave = Swal.resumeTimer
             }
         }).fire()
-        alert(mensaje)
+        
         if (codigo == 2 && respuesta.status == 200) {
             formulario.reset()
             getProgramador(alerta='no');
@@ -245,7 +248,9 @@ const cancelar = () => {
     btnLimpiar.parentElement.style.display = ''
 }
 
- const EliminarProgramadores = async (programador) => {
+//ELIMINAR
+
+const EliminarProgramador = async (programador) => {
 
     console.log(programador)
 
@@ -253,7 +258,7 @@ const cancelar = () => {
     const formData = new FormData(formulario)
     // console.log(formulario);
     formData.append('tipo', 3)
-    formData.append('programador_id', programador)
+    formData.append('progra_id', programador)
     const config = {
         method: 'POST',
         body: formData
@@ -263,12 +268,12 @@ const cancelar = () => {
         const respuesta = await fetch(url, config)
         const data = await respuesta.json()
         const { mensaje, codigo, detalle } = data
-        console.log(data)
+        // console.log(data)
         Swal.mixin({
             toast: true,
             position: "top-end",
             showConfirmButton: false,
-            timer: 2000,
+            timer: 3000,
             timerProgressBar: true,
             icon: "success",
             title: mensaje,
@@ -277,7 +282,6 @@ const cancelar = () => {
                 toast.onmouseleave = Swal.resumeTimer
             }
         }).fire()
-        alert(mensaje)
         if (codigo == 3 && respuesta.status == 200) {
             formulario.reset()
             getProgramador(alerta='no');
