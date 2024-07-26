@@ -34,7 +34,8 @@ abstract class Conexion
         $idInsertado = $conexion->lastInsertId();
         return [
             "resultado" => $resultado,
-            "id" => $idInsertado
+            "id" => $idInsertado,
+            'prepare' => $sentencia
         ];
     }
 

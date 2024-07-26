@@ -1,31 +1,35 @@
 <?php
-require '../../models/Programador.php';
+require '../../models/Aplicacion.php';
+
+$_POST['app_registro'] = str_replace('T', ' ', $_POST['app_registro']);
+$_POST['app_entrega'] = str_replace('T', ' ', $_POST['app_entrega']);
 
 header('Content-Type: application/json; charset=UTF-8');
 
 $metodo = $_SERVER['REQUEST_METHOD'];
 $tipo = $_REQUEST['tipo'];
-
+//    echo json_encode($_POST);
+//   exit;
 try {
     switch ($metodo) {
         case 'POST':
-            $programador = new Programador($_POST);
+            $aplicacion = new Aplicacion($_POST);
             switch ($tipo) {
                 case '1':
-                    $ejecucion = $programador->guardar();
-                    $mensaje = "Programador Guardado correctamente";
+                    $ejecucion = $aplicacion->guardar();
+                    $mensaje = "Aplicacion Guardado correctamente";
                     $codigo = 1;
                     break;
 
                 case '2':
-                    $ejecucion = $programador->modificar();
-                    $mensaje = "Programador Modificado correctamente";
+                    $ejecucion = $aplicacion->modificar();
+                    $mensaje = "Aplicacion Modificado correctamente";
                     $codigo = 2;
                     break;
-                
+
                 case '3':
-                    $ejecucion = $programador->eliminar();
-                    $mensaje = "Programador Eliminado correctamente";
+                    $ejecucion = $aplicacion->eliminar();
+                    $mensaje = "Aplicacion Eliminado correctamente";
                     $codigo = 3;
                     break;
 
@@ -38,14 +42,16 @@ try {
             echo json_encode([
                 "mensaje" => $mensaje,
                 "codigo" => $codigo,
+                "SQL" => $ejecucion,
+                "post" => $_POST,
             ]);
             break;
 
         case 'GET':
             http_response_code(200);
-            $programador = new Programador($_GET);
-            $programadores = $programador->buscar();
-            echo json_encode($programadores);
+            $aplicacion = new Aplicacion($_GET);
+            $aplicaciones = $aplicacion->buscar();
+            echo json_encode($aplicaciones);
             break;
 
         default:
@@ -61,6 +67,7 @@ try {
     echo json_encode([
         "detalle" => $e->getMessage(),
         "mensaje" => "Error de ejecución",
+        "post" => $_POST,
         "codigo" => 0,
     ]);
 }

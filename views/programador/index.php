@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-2">
                     <label for="progra_edad">Edad</label>
-                    <input type="number" name="progra_edad" id="progra_edad" step="1" class="form-control" required>
+                    <input type="number" name="progra_edad" id="progra_edad" class="form-control" required>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="progra_telefono">Teléfono</label>
-                    <input type="number" name="progra_telefono" id="progra_telefono" step="1" class="form-control" required>
+                    <input type="number" name="progra_telefono" id="progra_telefono" class="form-control" required>
                 </div>
                 <div class="col-5">
                     <label for="progra_dependencia">Dependencia</label>

@@ -3,23 +3,21 @@ const btnModificar = document.getElementById('btnModificar')
 const btnBuscar = document.getElementById('btnBuscar')
 const btnCancelar = document.getElementById('btnCancelar')
 const btnLimpiar = document.getElementById('btnLimpiar')
-const tablaProgramador = document.getElementById('tablaProgramador')
+const tablaApp = document.getElementById('tablaApp')
 const formulario = document.querySelector('form')
 
 btnModificar.parentElement.style.display = 'none'
 btnCancelar.parentElement.style.display = 'none'
 
-
-const getProgramador = async (alerta='si') => {
-    const nombre = formulario.progra_nombre.value
-    const apellido = formulario.progra_apellido.value
-    const edad = formulario.progra_edad.value
-    const correo = formulario.progra_correo.value
-    const direccion = formulario.progra_direccion.value
-    const telefono = formulario.progra_telefono.value
-    const dependencia = formulario.progra_dependencia.value
-    const genero = formulario.progra_genero.value
-    const url = `/proyecto_js/controllers/programador/index.php?progra_nombre=${nombre}&progra_apellido=${apellido}&progra_edad=${edad}&progra_correo=${correo}$progra_direccion=${direccion}&progra_telefono=${telefono}&progra_dependencia=${dependencia}&progra_genero=${genero}`
+const getAplicacion = async (alerta='si') => {
+    const nombre = formulario.app_nombre.value
+    const cantidad = formulario.app_cantidad.value
+    const registro = formulario.app_registro.value
+    const tipo = formulario.app_tipo.value
+    const entrega = formulario.app_entrega.value
+    const dependencia = formulario.app_dependencia.value
+    const descripcion = formulario.app_descripcion.value
+    const url = `/proyecto_js/controllers/aplicacion/index.php?app_nombre=${nombre}&app_cantidad=${cantidad}&app_registro=${registro}&app_tipo=${tipo}$app_entrega=${entrega}&app_descripcion=${descripcion}&app_dependencia=${dependencia}`
     const config = {
         method: 'GET'
     }
@@ -31,7 +29,7 @@ const getProgramador = async (alerta='si') => {
 
         // console.log(data)
 
-        tablaProgramador.tBodies[0].innerHTML = ''
+        tablaApp.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment()
         let contador = 1;
         // console.log(data);
@@ -44,7 +42,7 @@ const getProgramador = async (alerta='si') => {
                     timer: 3000,
                     timerProgressBar: true,
                     icon: "success",
-                    title: 'Programadores encontrados',
+                    title: 'Aplicaciones encontrados',
                     didOpen: (toast) => {
                         toast.onmouseenter = Swal.stopTimer;
                         toast.onmouseleave = Swal.resumeTimer;
@@ -53,7 +51,7 @@ const getProgramador = async (alerta='si') => {
             }
 
             if (data.length > 0) {
-                data.forEach(programador => {
+                data.forEach(aplicacion => {
                     const tr = document.createElement('tr')
                     const celda1 = document.createElement('td')
                     const celda2 = document.createElement('td')
@@ -61,27 +59,31 @@ const getProgramador = async (alerta='si') => {
                     const celda4 = document.createElement('td')
                     const celda5 = document.createElement('td')
                     const celda6 = document.createElement('td')
+                    const celda7 = document.createElement('td')
+                    const celda8 = document.createElement('td')
                     const buttonModificar = document.createElement('button')
                     const buttonEliminar = document.createElement('button')
 
                     celda1.innerText = contador;
-                    celda2.innerText = programador.progra_nombre;
-                    celda3.innerText = programador.progra_apellido;
-                    celda4.innerText = programador.progra_dependencia;
+                    celda2.innerText = aplicacion.app_nombre;
+                    celda3.innerText = aplicacion.app_registro;
+                    celda4.innerText = aplicacion.app_tipo;
+                    celda5.innerText = aplicacion.app_dependencia;
+                    celda6.innerText = aplicacion.app_entrega;
 
 
                     buttonModificar.textContent = 'Modificar'
                     buttonModificar.classList.add('btn', 'btn-secondary', 'w-100')
                     buttonModificar.innerHTML = '<i class="bi bi-back"></i>'
-                    buttonModificar.addEventListener('click', () => llenarDatos(programador))
+                    buttonModificar.addEventListener('click', () => llenarDatos(aplicacion))
 
                     buttonEliminar.textContent = 'Eliminar'
                     buttonEliminar.classList.add('btn', 'btn-danger', 'w-100')
                     buttonEliminar.innerHTML = '<i class="bi bi-person-x-fill"></i>'
-                    buttonEliminar.addEventListener('click', () => EliminarProgramador(programador.progra_id))
+                    buttonEliminar.addEventListener('click', () => EliminarAplicacion(aplicacion.app_id))
 
-                    celda5.appendChild(buttonModificar)
-                    celda6.appendChild(buttonEliminar)
+                    celda7.appendChild(buttonModificar)
+                    celda8.appendChild(buttonEliminar)
 
                     tr.appendChild(celda1)
                     tr.appendChild(celda2)
@@ -89,6 +91,8 @@ const getProgramador = async (alerta='si') => {
                     tr.appendChild(celda4)
                     tr.appendChild(celda5)
                     tr.appendChild(celda6)
+                    tr.appendChild(celda7)
+                    tr.appendChild(celda8)
                     fragment.appendChild(tr);
 
                     contador++
@@ -97,7 +101,7 @@ const getProgramador = async (alerta='si') => {
             } else {
                 const tr = document.createElement('tr')
                 const td = document.createElement('td')
-                td.innerText = 'No hay Programadores disponibles'
+                td.innerText = 'No hay Aplicaciones disponibles'
                 td.classList.add('text-center')
                 td.colSpan = 6;
 
@@ -108,7 +112,7 @@ const getProgramador = async (alerta='si') => {
             // console.log('hola');
         }
 
-        tablaProgramador.tBodies[0].appendChild(fragment)
+        tablaApp.tBodies[0].appendChild(fragment)
     } catch (error) {
         // console.log(error);
     }
@@ -116,15 +120,15 @@ const getProgramador = async (alerta='si') => {
 
 //GUARDAR
 
-const guardarProgramadores = async (e) => {
+const guardarAplicaciones = async (e) => {
     e.preventDefault()
     btnGuardar.disabled = true
-
-    const url = '/proyecto_js/controllers/programador/index.php'
+    const url = '/proyecto_js/controllers/aplicacion/index.php'
     const formData = new FormData(formulario)
-    // console.log(formData);
+    console.log(formulario.app_entrega.value);
+    console.log(formulario.app_registro.value);
     formData.append('tipo', 1)
-    formData.delete('progra_id')
+    formData.delete('app_id')
 
     const config = {
         method: 'POST',
@@ -135,7 +139,7 @@ const guardarProgramadores = async (e) => {
         const respuesta = await fetch(url, config)
         const data = await respuesta.json()
         const {mensaje, codigo, detalle } = data
-        console.log(data)
+     console.log(data)
 
         Swal.mixin({
             toast: true,
@@ -152,7 +156,7 @@ const guardarProgramadores = async (e) => {
         }).fire()
         if (codigo == 1 && respuesta.status == 200) {
             formulario.reset()
-            getProgramador(alerta='no');
+            getAplicacion(alerta='no');
         } else {
             console.log(detalle)
         }
@@ -164,19 +168,18 @@ const guardarProgramadores = async (e) => {
 }
 
 
-const llenarDatos = (programador) => {
+const llenarDatos = (aplicacion) => {
 
-    console.log(programador)
+    console.log(aplicacion)
 
-    formulario.progra_id.value = programador.progra_id
-    formulario.progra_nombre.value = programador.progra_nombre
-    formulario.progra_apellido.value = programador.progra_apellido
-    formulario.progra_edad.value = programador.progra_edad
-    formulario.progra_correo.value = programador.progra_correo
-    formulario.progra_direccion.value = programador.progra_direccion
-    formulario.progra_telefono.value = programador.progra_telefono
-    formulario.progra_dependencia.value = programador.progra_dependencia
-    formulario.progra_genero.value = programador.progra_genero
+    formulario.app_id.value = aplicacion.app_id
+    formulario.app_nombre.value = aplicacion.app_nombre
+    formulario.app_cantidad.value = aplicacion.app_cantidad
+    formulario.app_registro.value = aplicacion.app_registro
+    formulario.app_tipo.value = aplicacion.app_tipo
+    formulario.app_entrega.value = aplicacion.app_entrega
+    formulario.app_descripcion.value = aplicacion.app_descripcion
+    formulario.app_dependencia.value = aplicacion.app_dependencia
 
     btnModificar.parentElement.style.display = ''
     btnCancelar.parentElement.style.display = ''
@@ -188,11 +191,10 @@ const llenarDatos = (programador) => {
 
 //MODIFICAR
 
-const ModificarProgramadores = async (e) => {
+const ModificarAplicaciones = async (e) => {
     e.preventDefault()
     btnModificar.disabled = true
-
-    const url = '/proyecto_js/controllers/programador/index.php'
+    const url = '/proyecto_js/controllers/aplicacion/index.php'
     const formData = new FormData(formulario)
     // console.log(formulario);
     formData.append('tipo', 2)
@@ -222,7 +224,7 @@ const ModificarProgramadores = async (e) => {
         
         if (codigo == 2 && respuesta.status == 200) {
             formulario.reset()
-            getProgramador(alerta='no');
+            getAplicacion(alerta='no');
             btnModificar.parentElement.style.display = 'none'
             btnCancelar.parentElement.style.display = 'none'
             btnGuardar.parentElement.style.display = ''
@@ -240,7 +242,7 @@ const ModificarProgramadores = async (e) => {
 
 const cancelar = () => {
     formulario.reset()
-    getProgramador();
+    getAplicacion();
     btnModificar.parentElement.style.display = 'none'
     btnCancelar.parentElement.style.display = 'none'
     btnGuardar.parentElement.style.display = ''
@@ -250,15 +252,15 @@ const cancelar = () => {
 
 //ELIMINAR
 
-const EliminarProgramador = async (programador) => {
+const EliminarAplicacion = async (aplicacion) => {
 
-    console.log(programador)
+    console.log(aplicacion)
 
-    const url = '/proyecto_js/controllers/programador/index.php'
+    const url = '/proyecto_js/controllers/aplicacion/index.php'
     const formData = new FormData(formulario)
     // console.log(formulario);
     formData.append('tipo', 3)
-    formData.append('progra_id', programador)
+    formData.append('app_id', aplicacion)
     const config = {
         method: 'POST',
         body: formData
@@ -284,7 +286,7 @@ const EliminarProgramador = async (programador) => {
         }).fire()
         if (codigo == 3 && respuesta.status == 200) {
             formulario.reset()
-            getProgramador(alerta='no');
+            getAplicacion(alerta='no');
             btnModificar.parentElement.style.display = 'none'
             btnCancelar.parentElement.style.display = 'none'
             btnGuardar.parentElement.style.display = ''
@@ -300,10 +302,9 @@ const EliminarProgramador = async (programador) => {
     btnModificar.disabled = false
 }
 
-getProgramador();
+getAplicacion();
 
-
-formulario.addEventListener('submit', guardarProgramadores)
-btnModificar.addEventListener('click', ModificarProgramadores)
-btnBuscar.addEventListener('click',() => { getProgramador(alerta='si') } )
+formulario.addEventListener('submit', guardarAplicaciones)
+btnModificar.addEventListener('click', ModificarAplicaciones)
+btnBuscar.addEventListener('click',() => { getAplicacion(alerta='si') } )
 btnCancelar.addEventListener('click', cancelar)
