@@ -122,7 +122,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="6">No hay Programadores disponibles</td>
+                        <td colspan="6">No hay Aplicaciones disponibles</td>
                     </tr>
                 </tbody>
             </table>
