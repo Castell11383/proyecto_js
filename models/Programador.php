@@ -50,7 +50,7 @@ class Programador extends Conexion
     }
 
     if ($this->progra_edad != '') {
-        $sql .= " AND progra_edad = $this->progra_edad";
+        $sql .= " AND progra_edad = '$this->progra_edad'";
     }
 
     if ($this->progra_genero != '') {

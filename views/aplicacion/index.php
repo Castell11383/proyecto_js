@@ -107,7 +107,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 table-responsive">
             <h2 class="text-center">Listado de Aplicaciones</h2>
-            <table class="table table-bordered table-hover border-dark shadow" id="tablaApp">
+            <table class="table table-bordered table-hover border-dark shadow" id="tablaAplicacion">
                 <thead class="text-center table-dark">
                     <tr>
                         <th>No.</th>

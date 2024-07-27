@@ -36,44 +36,44 @@ class Aplicacion extends Conexion
     }
 
     public function buscar()
-{
-    $sql = "SELECT * FROM aplicaciones WHERE app_situacion = 1";
+    {
+        $sql = "SELECT * FROM aplicaciones WHERE app_situacion = 1";
 
-    if ($this->app_nombre != '') {
-        $sql .= " AND app_nombre LIKE '%$this->app_nombre%'";
+        if ($this->app_nombre != '') {
+            $sql .= " AND app_nombre LIKE '%$this->app_nombre%'";
+        }
+
+        if ($this->app_cantidad != '') {
+            $sql .= " AND app_cantidad LIKE '%$this->app_cantidad%'";
+        }
+
+        if ($this->app_registro != '') {
+            $sql .= " AND app_registro = '$this->app_registro'";
+        }
+
+        if ($this->app_entrega != '') {
+            $sql .= " AND app_entrega = '$this->app_entrega'";
+        }
+
+        if ($this->app_tipo != '') {
+            $sql .= " AND app_tipo = '$this->app_tipo'";
+        }
+
+        if ($this->app_dependencia != '') {
+            $sql .= " AND app_dependencia LIKE '%$this->app_dependencia%'";
+        }
+
+        if ($this->app_descripcion != '') {
+            $sql .= " AND app_descripcion LIKE '%$this->app_descripcion%'";
+        }
+
+        if ($this->app_id != null) {
+            $sql .= " AND app_id = $this->app_id";
+        }
+
+        $resultado = self::servir($sql);
+        return $resultado;      
     }
-
-    if ($this->app_cantidad != '') {
-        $sql .= " AND app_cantidad LIKE '%$this->app_cantidad%'";
-    }
-
-    if ($this->app_registro != '') {
-        $sql .= " AND app_registro = $this->app_registro";
-    }
-
-    if ($this->app_entrega != '') {
-        $sql .= " AND app_entrega = '$this->app_entrega'";
-    }
-
-    if ($this->app_tipo != '') {
-        $sql .= " AND app_tipo = '$this->app_tipo'";
-    }
-
-    if ($this->app_dependencia != '') {
-        $sql .= " AND app_dependencia LIKE '%$this->app_dependencia%'";
-    }
-
-    if ($this->app_descripcion != '') {
-        $sql .= " AND app_descripcion LIKE '%$this->app_descripcion%'";
-    }
-
-    if ($this->app_id != null) {
-        $sql .= " AND app_id = $this->app_id";
-    }
-
-    $resultado = self::servir($sql);
-    return $resultado;
-}
 
     public function modificar()
     {

@@ -3,7 +3,7 @@ const btnModificar = document.getElementById('btnModificar')
 const btnBuscar = document.getElementById('btnBuscar')
 const btnCancelar = document.getElementById('btnCancelar')
 const btnLimpiar = document.getElementById('btnLimpiar')
-const tablaApp = document.getElementById('tablaApp')
+const tablaAplicacion = document.getElementById('tablaAplicacion')
 const formulario = document.querySelector('form')
 
 btnModificar.parentElement.style.display = 'none'
@@ -17,19 +17,19 @@ const getAplicacion = async (alerta='si') => {
     const entrega = formulario.app_entrega.value
     const dependencia = formulario.app_dependencia.value
     const descripcion = formulario.app_descripcion.value
-    const url = `/proyecto_js/controllers/aplicacion/index.php?app_nombre=${nombre}&app_cantidad=${cantidad}&app_registro=${registro}&app_tipo=${tipo}$app_entrega=${entrega}&app_descripcion=${descripcion}&app_dependencia=${dependencia}`
+    const url = `/proyecto_js/controllers/aplicacion/index.php?app_nombre=${nombre}&app_cantidad=${cantidad}&app_registro=${registro}&app_tipo=${tipo}&app_entrega=${entrega}&app_descripcion=${descripcion}&app_dependencia=${dependencia}`
     const config = {
         method: 'GET'
     }
 
     try {
         const respuesta = await fetch(url, config);
-        // console.log(respuesta)
+        // Console.log(respuesta)
         const data = await respuesta.json();
 
         // console.log(data)
 
-        tablaApp.tBodies[0].innerHTML = ''
+        tablaAplicacion.tBodies[0].innerHTML = ''
         const fragment = document.createDocumentFragment()
         let contador = 1;
         // console.log(data);
@@ -112,7 +112,7 @@ const getAplicacion = async (alerta='si') => {
             // console.log('hola');
         }
 
-        tablaApp.tBodies[0].appendChild(fragment)
+        tablaAplicacion.tBodies[0].appendChild(fragment)
     } catch (error) {
         // console.log(error);
     }
@@ -120,13 +120,13 @@ const getAplicacion = async (alerta='si') => {
 
 //GUARDAR
 
-const guardarAplicaciones = async (e) => {
+const guardarAplicacion = async (e) => {
     e.preventDefault()
     btnGuardar.disabled = true
     const url = '/proyecto_js/controllers/aplicacion/index.php'
     const formData = new FormData(formulario)
-    console.log(formulario.app_entrega.value);
-    console.log(formulario.app_registro.value);
+    // console.log(formulario.app_entrega.value);
+    // console.log(formulario.app_registro.value);
     formData.append('tipo', 1)
     formData.delete('app_id')
 
@@ -139,7 +139,7 @@ const guardarAplicaciones = async (e) => {
         const respuesta = await fetch(url, config)
         const data = await respuesta.json()
         const {mensaje, codigo, detalle } = data
-     console.log(data)
+        // console.log(data)
 
         Swal.mixin({
             toast: true,
@@ -191,12 +191,12 @@ const llenarDatos = (aplicacion) => {
 
 //MODIFICAR
 
-const ModificarAplicaciones = async (e) => {
+const ModificarAplicacion = async (e) => {
     e.preventDefault()
     btnModificar.disabled = true
     const url = '/proyecto_js/controllers/aplicacion/index.php'
     const formData = new FormData(formulario)
-    // console.log(formulario);
+    console.log(formulario);
     formData.append('tipo', 2)
     const config = {
         method: 'POST',
@@ -207,7 +207,7 @@ const ModificarAplicaciones = async (e) => {
         const respuesta = await fetch(url, config)
         const data = await respuesta.json()
         const { mensaje, codigo, detalle } = data
-        console.log(data)
+        // console.log(data)
         Swal.mixin({
             toast: true,
             position: "top-end",
@@ -304,7 +304,7 @@ const EliminarAplicacion = async (aplicacion) => {
 
 getAplicacion();
 
-formulario.addEventListener('submit', guardarAplicaciones)
-btnModificar.addEventListener('click', ModificarAplicaciones)
+formulario.addEventListener('submit', guardarAplicacion)
+btnModificar.addEventListener('click', ModificarAplicacion)
 btnBuscar.addEventListener('click',() => { getAplicacion(alerta='si') } )
 btnCancelar.addEventListener('click', cancelar)
