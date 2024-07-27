@@ -110,26 +110,41 @@
         <div class="row mb-3">
             <div class="col">
                 <div class="cta">
-                    <a href="https://www.solusoft.es/servicios/desarrollo-de-software" class="bg-warning">Contáctanos</a>
+                    <a href="https://www.solusoft.es/servicios/desarrollo-de-software" class="bg-warning"><i class="bi bi-telephone-inbound-fill"></i> Contáctanos</a>
                 </div>
             </div>
             <div class="col">
                 <div class="cta">
-                    <a href="" class="bg-success">WhatsApp</a>
+                    <a href="https://www.whatsapp.com/?lang=es_LA" class="bg-success"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="cta">
+                    <a href="https://x.com/?lang=es&mx=2" class="bg-dark"><i class="bi bi-twitter-x"></i> Twitter</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="cta">
+                    <a href="https://www.facebook.com/" class="bg-primary"><i class="bi bi-facebook"></i> Facebook</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="cta">
+                    <a href="https://www.instagram.com/" class="bg-danger"><i class="bi bi-instagram"></i> Instagram</a>
                 </div>
             </div>
         </div>
 
         <div class="services">
-            <div class="service">
+            <div class="service shadow">
                 <h2>Desarrollo de Software</h2>
                 <p>Ofrecemos servicios de desarrollo de software a medida para satisfacer las necesidades específicas de tu negocio.</p>
             </div>
-            <div class="service">
+            <div class="service shadow">
                 <h2>Consultoría Tecnológica</h2>
                 <p>Nuestros consultores te ayudarán a identificar y implementar las mejores soluciones tecnológicas para tu empresa.</p>
             </div>
-            <div class="service">
+            <div class="service shadow">
                 <h2>Gestión de Proyectos</h2>
                 <p>Gestionamos tus proyectos tecnológicos desde la planificación hasta la implementación, asegurando el éxito en cada etapa.</p>
             </div>
