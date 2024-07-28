@@ -24,6 +24,7 @@
             <i class="bi bi-person-workspace"></i> Tareas
           </a>
         </li>
+      </ul>
     </div>
   </div>
 </nav>
