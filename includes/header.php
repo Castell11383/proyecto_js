@@ -20,6 +20,4 @@
 </style>
 <body>
 
-<div class="container mt-5 pt-3 text_light">
-
     <?php include_once 'navbar.php' ?>

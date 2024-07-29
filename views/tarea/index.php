@@ -6,10 +6,8 @@ require_once '../../models/Programador.php';
 try {
     $programador = new Programador();
     $programadores = $programador->buscar();
-
 } catch (PDOException $e) {
     $error = $e->getMessage();
-
 } catch (Exception $e2) {
     $error = $e2->getMessage();
 }
@@ -17,10 +15,8 @@ try {
 try {
     $aplicacion = new Aplicacion();
     $aplicaciones = $aplicacion->buscar();
-
 } catch (PDOException $e) {
     $error = $e->getMessage();
-
 } catch (Exception $e2) {
     $error = $e2->getMessage();
 }
@@ -100,29 +96,28 @@ try {
     </div>
 </div>
 
-<div class="container mt-5 pt-3">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 table-responsive">
-            <h2 class="text-center">Listado de Tareas</h2>
-            <table class="table table-bordered table-hover border-dark shadow" id="tablaTarea">
-                <thead class="text-center table-dark">
-                    <tr>
-                        <th>No.</th>
-                        <th>Programador</th>
-                        <th>Aplicacion</th>
-                        <th>Descripcion</th>
-                        <th>Modificar</th>
-                        <th>Eliminar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="6">No hay Tareas disponibles</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="container mt-5 pt-3 justify-content-center">
+    <h2 class="text-center">Listado de Tareas</h2>
+    <table class="table table-bordered table-hover border-dark table-responsive shadow" id="tablaTarea">
+        <thead class="text-center table-dark">
+            <tr>
+                <th>No.</th>
+                <th>Programador</th>
+                <th>Aplicacion</th>
+                <th>Entrega</th>
+                <th>Tipo</th>
+                <th>Dependencia</th>
+                <th>Descripcion</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="9">No hay Tareas disponibles</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <script defer src="../../src/js/funciones.js"></script>

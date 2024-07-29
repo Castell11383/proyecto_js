@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg bg-info subtle">
+<nav class="navbar fixed-top navbar-expand-lg bg-secondary bg-gradient subtle">
   <div class="container-fluid">
     <a class="navbar-brand" href="/proyecto_js/views/inicio.php"><img src="/../proyecto_js/src/images/sofware.png" width="40" height="40"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">

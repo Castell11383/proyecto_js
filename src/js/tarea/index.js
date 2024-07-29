@@ -11,10 +11,7 @@ btnCancelar.parentElement.style.display = 'none'
 
 
 const getTarea = async (alerta='si') => {
-    const programador = formulario.tarea_programador.value
-    const aplicacion = formulario.tarea_aplicacion.value
-    const descripcion = formulario.tarea_descripcion.value
-    const url = `/proyecto_js/controllers/tarea/index.php?tarea_programador=${programador}&tarea_aplicacion=${aplicacion}&tarea_descripcion=${descripcion}`
+    const url = `/proyecto_js/controllers/tarea/index.php`
     const config = {
         method: 'GET'
     }
@@ -32,7 +29,7 @@ const getTarea = async (alerta='si') => {
             if(alerta == 'si'){
                 Swal.mixin({
                     toast: true,
-                    position: "top-end",
+                    position: "top-right",
                     showConfirmButton: false,
                     timer: 3000,
                     timerProgressBar: true,
@@ -54,13 +51,19 @@ const getTarea = async (alerta='si') => {
                     const celda4 = document.createElement('td')
                     const celda5 = document.createElement('td')
                     const celda6 = document.createElement('td')
+                    const celda7 = document.createElement('td')
+                    const celda8 = document.createElement('td')
+                    const celda9 = document.createElement('td')
                     const buttonModificar = document.createElement('button')
                     const buttonEliminar = document.createElement('button')
 
                     celda1.innerText = contador;
-                    celda2.innerText = tarea.tarea_programador;
-                    celda3.innerText = tarea.tarea_aplicacion;
-                    celda4.innerText = tarea.tarea_descripcion;
+                    celda2.innerText = tarea.nombre_completo;
+                    celda3.innerText = tarea.app_nombre;
+                    celda4.innerText = tarea.app_entrega;
+                    celda5.innerText = tarea.app_tipo;
+                    celda6.innerText = tarea.app_dependencia;
+                    celda7.innerText = tarea.tarea_descripcion;
 
 
                     buttonModificar.textContent = 'Modificar'
@@ -73,8 +76,8 @@ const getTarea = async (alerta='si') => {
                     buttonEliminar.innerHTML = '<i class="bi bi-person-x-fill"></i>'
                     buttonEliminar.addEventListener('click', () => EliminarTareas(tarea.tarea_id))
 
-                    celda5.appendChild(buttonModificar)
-                    celda6.appendChild(buttonEliminar)
+                    celda8.appendChild(buttonModificar)
+                    celda9.appendChild(buttonEliminar)
 
                     tr.appendChild(celda1)
                     tr.appendChild(celda2)
@@ -82,6 +85,9 @@ const getTarea = async (alerta='si') => {
                     tr.appendChild(celda4)
                     tr.appendChild(celda5)
                     tr.appendChild(celda6)
+                    tr.appendChild(celda7)
+                    tr.appendChild(celda8)
+                    tr.appendChild(celda9)
                     fragment.appendChild(tr);
 
                     contador++
@@ -92,7 +98,7 @@ const getTarea = async (alerta='si') => {
                 const td = document.createElement('td')
                 td.innerText = 'No hay Tareas disponibles'
                 td.classList.add('text-center')
-                td.colSpan = 6;
+                td.colSpan = 9;
 
                 tr.appendChild(td)
                 fragment.appendChild(tr)
@@ -132,7 +138,7 @@ const guardarTareas = async (e) => {
 
         Swal.mixin({
             toast: true,
-            position: "center",
+            position: "top-right",
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -196,7 +202,7 @@ const ModificarTareas = async (e) => {
         console.log(data)
         Swal.mixin({
             toast: true,
-            position: "center",
+            position: "top-right",
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -240,7 +246,7 @@ const cancelar = () => {
 
 const EliminarTareas = async (tarea) => {
 
-    console.log(tarea)
+    // console.log(tarea)
 
     const url = '/proyecto_js/controllers/tarea/index.php'
     const formData = new FormData(formulario)
@@ -259,7 +265,7 @@ const EliminarTareas = async (tarea) => {
         // console.log(data)
         Swal.mixin({
             toast: true,
-            position: "center",
+            position: "top-right",
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -272,7 +278,7 @@ const EliminarTareas = async (tarea) => {
         }).fire()
         if (codigo == 3 && respuesta.status == 200) {
             formulario.reset()
-            getProgramador(alerta='no');
+            getTarea(alerta='no');
             btnModificar.parentElement.style.display = 'none'
             btnCancelar.parentElement.style.display = 'none'
             btnGuardar.parentElement.style.display = ''

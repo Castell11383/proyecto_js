@@ -28,40 +28,28 @@ class Tarea extends Conexion
     }
 
     public function buscar()
-{
-    $sql = "SELECT * FROM tarea WHERE tarea_situacion = 1";
+    {
+        $sql = "SELECT  tarea_id, progra_nombre ||' '|| progra_apellido  AS nombre_completo, app_nombre, app_entrega, app_tipo, app_dependencia, tarea_descripcion, tarea_situacion from tarea
+        inner join aplicaciones on tarea_aplicacion = app_id
+        inner join programadores on tarea_programador = progra_id
+        where tarea_situacion = 1";
 
-    if ($this->tarea_programador != '') {
-        $sql .= " AND tarea_programador LIKE '%$this->tarea_programador%'";
+        $resultado = self::servir($sql);
+        return $resultado;
     }
-
-    if ($this->tarea_aplicacion != '') {
-        $sql .= " AND tarea_aplicacion LIKE '%$this->tarea_aplicacion%'";
-    }
-
-    if ($this->tarea_descripcion != '') {
-        $sql .= " AND tarea_descripcion LIKE '%$this->tarea_descripcion%'";
-    }
-
-    if ($this->tarea_id != null) {
-        $sql .= " AND tarea_id = $this->tarea_id";
-    }
-
-    $resultado = self::servir($sql);
-    return $resultado;
-}
 
     public function modificar()
     {
-        $sql = "UPDATE tarea SET tarea_programador = '$this->tarea_programador', tarea_aplicacion = '$this->tarea_aplicacion', tarea_descripcion = '$this->tarea_descripcion' where tarea_id = $this->tarea_id";
-
+        $sql = "UPDATE tarea SET nombre_completo = (SELECT progra_nombre || ' ' || progra_apellido FROM programadores WHERE programadores.progra_id = tarea.tarea_programador)
+        WHERE tarea_situacion = 1";
+        
         $resultado = self::ejecutar($sql);
         return $resultado;
     }
 
     public function eliminar()
     {
-        $sql = "UPDATE tarea SET tarea_situacion = 0 where tarea_id = $this->tarea_id";
+        $sql = "UPDATE tarea SET tarea_situacion = 0 WHERE tarea_id = $this->tarea_id";
 
         $resultado = self::ejecutar($sql);
         return $resultado;
