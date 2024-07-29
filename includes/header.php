@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Proyecto_JS</title>
 </head>
+<style>
+    body {
+        background-image: url('/src/images/2.jpg');
+        background-size: cover;
+        background-position: center center;
+        height: 100vh;
+        margin: 0;
+    }
+</style>
 <body>
 
     <?php include_once 'navbar.php' ?>
