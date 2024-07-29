@@ -6,8 +6,10 @@ require_once '../../models/Programador.php';
 try {
     $programador = new Programador();
     $programadores = $programador->buscar();
+
 } catch (PDOException $e) {
     $error = $e->getMessage();
+
 } catch (Exception $e2) {
     $error = $e2->getMessage();
 }
@@ -15,8 +17,10 @@ try {
 try {
     $aplicacion = new Aplicacion();
     $aplicaciones = $aplicacion->buscar();
+
 } catch (PDOException $e) {
     $error = $e->getMessage();
+
 } catch (Exception $e2) {
     $error = $e2->getMessage();
 }
@@ -27,7 +31,7 @@ try {
 
 
 <div class="container mt-5 pt-3">
-    <h1 class="text-center text-black">Registro de Tareas</h1>
+    <h1 class="text-center">Registro de Tareas</h1>
     <div class="row justify-content-center">
         <form id="form" class="col-lg-8 border bg-dark bg-gradient text-white text-center p-3 rounded shadow">
             <input type="hidden" name="tarea_id" id="tarea_id">
@@ -37,7 +41,7 @@ try {
                     <select name="tarea_programador" id="tarea_programador" class="form-select" required>
                         <option value="">Select</option>
                         <?php foreach ($programadores as $key => $programador) : ?>
-                            <option value="<?= $programador['PROGRA_ID'] ?>"><?= $programador['PROGRA_NOMBRE'] ?></option>
+                            <option value="<?= $programador['progra_id'] ?>"><?= $programador['progra_nombre'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>
@@ -47,7 +51,7 @@ try {
                     <select name="tarea_aplicacion" id="tarea_aplicacion" step="1" class="form-select" required>
                         <option value="">Select</option>
                         <?php foreach ($aplicaciones as $key => $aplicacion) : ?>
-                            <option value="<?= $aplicacion['APP_ID'] ?>"><?= $aplicacion['APP_NOMBRE'] ?></option>
+                            <option value="<?= $aplicacion['app_id'] ?>"><?= $aplicacion['app_nombre'] ?></option>
                         <?php endforeach ?>
                     </select>
                 </div>

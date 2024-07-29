@@ -13,10 +13,13 @@
         background-image: url('/../proyecto_js/src/images/2.jpg');
         background-size: cover;
         background-position: center center;
+        color: white;
         height: 100vh;
         margin: 0;
     }
 </style>
 <body>
+
+<div class="container mt-5 pt-3 text_light">
 
     <?php include_once 'navbar.php' ?>

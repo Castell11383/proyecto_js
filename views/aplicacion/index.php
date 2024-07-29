@@ -1,6 +1,6 @@
 <?php include_once '../../includes/header.php' ?>
 <div class="container mt-5 pt-3">
-    <h1 class="text-center text-black">Registro de Aplicaciones</h1>
+    <h1 class="text-center">Registro de Aplicaciones</h1>
     <div class="row justify-content-center">
         <form id="form" class="col-lg-8 border bg-dark bg-gradient text-white text-center p-3 rounded shadow">
             <input type="hidden" name="app_id" id="app_id">
