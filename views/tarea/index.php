@@ -34,7 +34,7 @@ try {
             <div class="row mb-3">
                 <div class="col-6">
                     <label for="tarea_programador">Programador</label>
-                    <select name="tarea_programador" id="tarea_programador" class="form-control" required>
+                    <select name="tarea_programador" id="tarea_programador" class="form-select" required>
                         <option value="">Select</option>
                         <?php foreach ($programadores as $key => $programador) : ?>
                             <option value="<?= $programador['PROGRA_ID'] ?>"><?= $programador['PROGRA_NOMBRE'] ?></option>
@@ -44,7 +44,7 @@ try {
 
                 <div class="col-6">
                     <label for="tarea_aplicacion">Aplicacion</label>
-                    <select name="tarea_aplicacion" id="tarea_aplicacion" step="1" class="form-control" required>
+                    <select name="tarea_aplicacion" id="tarea_aplicacion" step="1" class="form-select" required>
                         <option value="">Select</option>
                         <?php foreach ($aplicaciones as $key => $aplicacion) : ?>
                             <option value="<?= $aplicacion['APP_ID'] ?>"><?= $aplicacion['APP_NOMBRE'] ?></option>

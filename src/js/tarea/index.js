@@ -132,7 +132,7 @@ const guardarTareas = async (e) => {
 
         Swal.mixin({
             toast: true,
-            position: "top-end",
+            position: "center",
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -196,7 +196,7 @@ const ModificarTareas = async (e) => {
         console.log(data)
         Swal.mixin({
             toast: true,
-            position: "top-end",
+            position: "center",
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
@@ -259,7 +259,7 @@ const EliminarTareas = async (tarea) => {
         // console.log(data)
         Swal.mixin({
             toast: true,
-            position: "top-end",
+            position: "center",
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
