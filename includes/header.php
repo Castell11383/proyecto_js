@@ -10,7 +10,7 @@
 </head>
 <style>
     body {
-        background-image: url('/src/images/2.jpg');
+        background-image: url('/../proyecto_js/src/images/2.jpg');
         background-size: cover;
         background-position: center center;
         height: 100vh;
